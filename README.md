@@ -14,7 +14,7 @@ images/covers/          card cover images (1200×800, uniform 3:2)
 images/detail/          full-size images shown in the modal (max 1400px)
 images/thumbs/          modal gallery thumbnails
 resume/                 resume source (resume.html) + generated PDF
-webfonts/               self-hosted Fraunces + Space Grotesk
+webfonts/               self-hosted Cormorant Garamond + Space Grotesk
 scripts/process_images.py  regenerates covers/details/thumbs from source photos
 ```
 

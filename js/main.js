@@ -197,7 +197,7 @@
     },
     { rootMargin: "-40% 0px -55% 0px" }
   );
-  ["about", "resume", "skills", "projects", "contact"].forEach(function (id) {
+  ["about", "skills", "projects", "contact"].forEach(function (id) {
     var s = document.getElementById(id);
     if (s) spy.observe(s);
   });

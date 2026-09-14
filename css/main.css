@@ -1,20 +1,20 @@
 /* =====================================================================
    Jack Lundholm — portfolio
-   Palette: warm paper + near-black ink + one oxide-red accent.
-   Type: Fraunces (headings) / Space Grotesk (body), self-hosted.
+   Palette: warm paper + near-black ink + green accent.
+   Type: Cormorant Garamond (headings) / Space Grotesk (body), self-hosted.
    ===================================================================== */
 
 @font-face {
-  font-family: 'Fraunces';
-  src: url('../webfonts/fraunces-latin.woff2') format('woff2');
-  font-weight: 500 620;
+  font-family: 'Cormorant Garamond';
+  src: url('../webfonts/cormorant-600.woff2') format('woff2');
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Fraunces';
-  src: url('../webfonts/fraunces-italic-latin.woff2') format('woff2');
-  font-weight: 460 500;
+  font-family: 'Cormorant Garamond';
+  src: url('../webfonts/cormorant-italic-500.woff2') format('woff2');
+  font-weight: 500;
   font-style: italic;
   font-display: swap;
 }
@@ -34,9 +34,10 @@
   --muted: #6E675C;
   --faint: #9B9488;
   --hairline: #DDD6C7;
-  --accent: #A63D2A;
-  --accent-soft: rgba(166, 61, 42, 0.14);
-  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --accent: #057447;
+  --accent-soft: rgba(5, 116, 71, 0.14);
+  --underline: rgba(116, 5, 49, 0.5);
+  --serif: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
   --sans: 'Space Grotesk', 'Segoe UI', 'Helvetica Neue', sans-serif;
   --nav-h: 60px;
 }
@@ -74,7 +75,7 @@ img { max-width: 100%; display: block; }
 a {
   color: inherit;
   text-decoration: underline;
-  text-decoration-color: rgba(166, 61, 42, 0.55);
+  text-decoration-color: rgba(116, 5, 49, 0.5);
   text-decoration-thickness: 1.5px;
   text-underline-offset: 3px;
   transition: color .18s ease, text-decoration-color .18s ease;
@@ -152,8 +153,8 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 }
 .brand {
   font-family: var(--serif);
-  font-weight: 620;
-  font-size: 19px;
+  font-weight: 600;
+  font-size: 22px;
   letter-spacing: .01em;
   text-decoration: none;
   white-space: nowrap;
@@ -211,8 +212,8 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 }
 .hero h1 {
   font-family: var(--serif);
-  font-weight: 620;
-  font-size: clamp(2.9rem, 8.5vw, 5.4rem);
+  font-weight: 600;
+  font-size: clamp(3.4rem, 9vw, 6.2rem);
   line-height: 1.02;
   letter-spacing: -0.01em;
   margin: 0 0 14px;
@@ -226,8 +227,8 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 .tagline {
   font-family: var(--serif);
   font-style: italic;
-  font-weight: 460;
-  font-size: clamp(1.12rem, 2.4vw, 1.42rem);
+  font-weight: 500;
+  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
   line-height: 1.5;
   color: var(--muted);
   max-width: 34ch;
@@ -240,6 +241,92 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   max-width: 440px;
   height: auto;
   justify-self: end;
+}
+
+/* ---------- animated design tree ----------
+   A branching line drawing that grows from a single root — an iterative
+   design process. Ink strokes are explored branches; the accent route is
+   the chosen path, carrying a traveling pulse to its terminal node.    */
+
+.tree path { fill: none; stroke-linecap: round; }
+
+/* every branch starts hidden (pathLength="1" normalizes the geometry) */
+.tree .branch {
+  stroke: var(--ink);
+  stroke-opacity: 0.75;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.w0 { stroke-width: 2.6; }
+.w1 { stroke-width: 2.2; }
+.w2 { stroke-width: 1.9; }
+.w3 { stroke-width: 1.6; }
+.w4 { stroke-width: 1.3; }
+
+/* draw-on, staggered by depth so the tree grows outward */
+.tree .d0 { animation: tree-draw 0.8s ease 0.15s forwards; }
+.tree .d1 { animation: tree-draw 0.7s ease 0.65s forwards; }
+.tree .d2 { animation: tree-draw 0.65s ease 1.1s forwards; }
+.tree .d3 { animation: tree-draw 0.6s ease 1.55s forwards; }
+.tree .d4 { animation: tree-draw 0.55s ease 2s forwards; }
+
+/* the chosen route — drawn along with the growth */
+.tree .accent-route {
+  stroke: var(--accent);
+  stroke-width: 2.8;
+  stroke-opacity: 0.95;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: tree-draw 2s ease 0.15s forwards;
+}
+/* a pulse that travels the chosen route forever, after the tree is grown */
+.tree .accent-pulse {
+  stroke: var(--accent);
+  stroke-width: 5;
+  stroke-opacity: 0.7;
+  stroke-dasharray: 0.07 0.93;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  animation: tree-fade-in 0.4s ease 2.6s forwards,
+             tree-pulse 3.2s linear 2.6s infinite;
+}
+
+/* nodes pop as their branches arrive */
+.tree .node {
+  fill: var(--ink);
+  fill-opacity: 0.8;
+  opacity: 0;
+  transform: scale(0.2);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tree-pop 0.45s cubic-bezier(0.2, 0.8, 0.3, 1.3) forwards;
+}
+.tree .n0 { animation-delay: 0.05s; }
+.tree .n1 { animation-delay: 1.25s; }
+.tree .n2 { animation-delay: 1.65s; }
+.tree .n3 { animation-delay: 2.05s; }
+.tree .n4 { animation-delay: 2.45s; }
+.tree .node-small { fill-opacity: 0.55; }
+.tree .node-accent { fill: var(--accent); fill-opacity: 1; animation-delay: 2.55s; }
+
+/* breathing halo on the terminal node — the solution, settling */
+.tree .node-halo {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tree-halo 3.6s ease-in-out 3.2s infinite;
+}
+
+@keyframes tree-draw { to { stroke-dashoffset: 0; } }
+@keyframes tree-pop { to { opacity: 1; transform: scale(1); } }
+@keyframes tree-pulse { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes tree-fade-in { to { opacity: 1; } }
+@keyframes tree-halo {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  40% { opacity: 0.55; transform: scale(1.6); }
 }
 
 /* ---------- sections ---------- */
@@ -265,8 +352,8 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 }
 .sec-title {
   font-family: var(--serif);
-  font-weight: 620;
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
   line-height: 1.1;
   margin: 0 0 28px;
 }
@@ -331,8 +418,8 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 }
 .skill-group h3 {
   font-family: var(--serif);
-  font-weight: 620;
-  font-size: 1.12rem;
+  font-weight: 600;
+  font-size: 1.25rem;
   margin: 0 0 12px;
 }
 .skill-group ul { list-style: none; margin: 0; padding: 0; }
@@ -466,12 +553,12 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 .card-title {
   display: block;
   font-family: var(--serif);
-  font-weight: 620;
-  font-size: 1.22rem;
-  line-height: 1.25;
+  font-weight: 600;
+  font-size: 1.35rem;
+  line-height: 1.15;
   margin: 9px 0 7px;
 }
-.card:hover .card-title { text-decoration: underline; text-decoration-color: rgba(166,61,42,.4); text-underline-offset: 3px; }
+.card:hover .card-title { text-decoration: underline; text-decoration-color: var(--underline); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 .card-summary {
   display: block;
   color: var(--muted);
@@ -492,8 +579,8 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   align-items: center;
   gap: 14px;
   font-family: var(--serif);
-  font-weight: 620;
-  font-size: clamp(1.35rem, 4vw, 2.1rem);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 4vw, 2.3rem);
   text-decoration: none;
   border-bottom: 2px solid var(--accent);
   padding-bottom: 6px;
@@ -538,8 +625,8 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 }
 .footer-name {
   font-family: var(--serif);
-  font-weight: 620;
-  font-size: 16px;
+  font-weight: 600;
+  font-size: 18px;
   color: var(--ink);
   margin: 0;
 }
@@ -556,8 +643,8 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 /* ---------- modal ---------- */
 
 .modal {
-  width: min(1080px, calc(100vw - 32px));
-  max-height: min(92vh, 900px);
+  width: min(1240px, calc(100vw - 28px));
+  max-height: 94vh;
   padding: 0;
   border: 1px solid var(--ink);
   background: var(--paper);
@@ -567,12 +654,43 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 .modal::backdrop {
   background: rgba(32, 29, 25, 0.5);
 }
-.modal[open] { display: block; overflow: hidden; }
+/* the dialog itself is the one scroll container — long content just scrolls */
+.modal[open] { display: block; overflow-y: auto; overscroll-behavior: contain; }
 
-.modal-card {
+.modal-card { display: flex; flex-direction: column; }
+
+/* sticky bar: category / date + close, always reachable while scrolling */
+.modal-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--hairline);
+  padding: 10px 14px 10px 22px;
+  min-height: 54px;
+}
+.modal-kicker {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.modal-kicker .dot { color: var(--faint); margin: 0 8px; }
+.modal-kicker #modal-date { color: var(--faint); text-transform: none; letter-spacing: .02em; }
+
+.modal-main {
   display: grid;
   grid-template-columns: minmax(0, 11fr) minmax(0, 9fr);
-  max-height: min(92vh, 900px);
 }
 .modal-media {
   margin: 0;
@@ -581,6 +699,9 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   display: flex;
   flex-direction: column;
   min-width: 0;
+  position: sticky;
+  top: 54px;
+  align-self: start;
 }
 .modal-stage {
   position: relative;
@@ -594,7 +715,7 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 .modal-stage img {
   width: 100%;
   height: 100%;
-  max-height: 62vh;
+  max-height: 56vh;
   object-fit: contain;
 }
 .gallery-nav {
@@ -647,26 +768,14 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 }
 
 .modal-body {
-  padding: clamp(24px, 4vw, 40px) clamp(22px, 3.5vw, 38px) clamp(28px, 4vw, 44px);
-  overflow-y: auto;
+  padding: clamp(24px, 4vw, 44px) clamp(22px, 3.5vw, 42px) clamp(32px, 4vw, 52px);
   min-width: 0;
-  position: relative;
 }
-.modal-kicker {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 0 0 10px;
-}
-.modal-kicker .dot { color: var(--faint); margin: 0 8px; }
-.modal-kicker #modal-date { color: var(--faint); text-transform: none; letter-spacing: .02em; }
 .modal-body h3 {
   font-family: var(--serif);
-  font-weight: 620;
-  font-size: clamp(1.5rem, 3vw, 1.9rem);
-  line-height: 1.15;
+  font-weight: 600;
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  line-height: 1.12;
   margin: 0 0 20px;
 }
 .modal-meta {
@@ -698,16 +807,15 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  text-decoration-color: var(--underline);
 }
+.modal-links a:hover { text-decoration-color: var(--underline); }
 .modal-links a::after { content: "↗"; color: var(--accent); font-size: 13px; }
 
 .modal-close {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  z-index: 5;
-  width: 36px;
-  height: 36px;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -716,7 +824,7 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   border: 1px solid var(--ink);
   border-radius: 50%;
   cursor: pointer;
-  transition: background .18s ease, color .18s ease;
+  transition: background .18s ease, color .18s ease, border-color .18s ease;
 }
 .modal-close:hover { background: var(--accent); border-color: var(--accent); color: #FBF9F3; }
 
@@ -733,10 +841,13 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   .about-grid { grid-template-columns: 1fr; }
   .about-facts dl { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
   .about-facts dl > div:nth-child(2) { border-top: 1px solid var(--hairline); }
-  .modal-card { grid-template-columns: 1fr; overflow-y: auto; max-height: min(92vh, 900px); }
-  .modal-media { border-right: none; border-bottom: 1px solid var(--hairline); }
+  .modal-main { grid-template-columns: 1fr; }
+  .modal-media {
+    border-right: none;
+    border-bottom: 1px solid var(--hairline);
+    position: static;
+  }
   .modal-stage img { max-height: 42vh; }
-  .modal-body { overflow: visible; }
 }
 
 @media (max-width: 620px) {
@@ -754,6 +865,11 @@ a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
+  /* show the design tree fully drawn, motionless */
+  .tree path { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; }
+  .tree .accent-pulse { display: none; }
+  .tree .node { opacity: 1; transform: none; }
+  .tree .node-halo { display: none; }
 }
 
 @media print {

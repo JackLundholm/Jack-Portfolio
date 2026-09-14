@@ -11,7 +11,7 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="webfonts/spacegrotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="webfonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="webfonts/cormorant-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -25,7 +25,6 @@
     <nav aria-label="Site sections">
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#resume">Resume</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -41,12 +40,12 @@
   <section class="hero" aria-label="Introduction">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <p class="kicker">Portfolio · Vancouver, BC</p>
+        <p class="kicker">Portfolio</p>
         <h1>Jack Lundholm</h1>
         <p class="identity">Engineering Physics Student @ UBC</p>
-        <p class="tagline">From submarine propellers to water-treatment plants — I like designing things that have to actually&nbsp;work.</p>
+        <p class="tagline">Sigma sigma on the wall, who's the skibidiest of them all? </p>
         <div class="hero-actions">
-          <a class="btn" href="#projects">See the work
+          <a class="btn" href="#projects">Projects
             <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M12 4v14m0 0l-6-6m6 6l6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <a class="btn btn-ghost" href="resume/Jack-Lundholm-Resume.pdf" target="_blank" rel="noopener">Resume&nbsp;·&nbsp;PDF
@@ -55,33 +54,71 @@
         </div>
       </div>
 
-      <!-- stacked propeller blade sections, drawn as a drafting figure -->
-      <svg class="hero-figure" viewBox="0 0 560 620" aria-hidden="true" focusable="false">
-        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <g stroke="#201D19" stroke-opacity="0.14">
-            <g transform="translate(70,110) rotate(-14) scale(0.55)">
-              <path d="M 60 0 C 130 -34, 280 -30, 400 -4 C 281 30, 131 26, 60 0 Z"/>
-              <path d="M 60 0 L 400 -4" stroke-dasharray="7 10"/>
-            </g>
-            <g transform="translate(95,200) rotate(-7) scale(0.7)">
-              <path d="M 60 0 C 130 -34, 280 -30, 400 -4 C 281 30, 131 26, 60 0 Z"/>
-              <path d="M 60 0 L 400 -4" stroke-dasharray="7 10"/>
-            </g>
-            <g transform="translate(120,290) scale(0.85)">
-              <path d="M 60 0 C 130 -34, 280 -30, 400 -4 C 281 30, 131 26, 60 0 Z"/>
-              <path d="M 60 0 L 400 -4" stroke-dasharray="7 10"/>
-            </g>
-            <g transform="translate(150,378) rotate(7)">
-              <path d="M 60 0 C 130 -34, 280 -30, 400 -4 C 281 30, 131 26, 60 0 Z"/>
-              <path d="M 60 0 L 400 -4" stroke-dasharray="7 10"/>
-            </g>
-          </g>
-          <g stroke="#A63D2A" stroke-opacity="0.85" stroke-width="2.5">
-            <g transform="translate(188,468) rotate(14) scale(1.15)">
-              <path d="M 60 0 C 130 -34, 280 -30, 400 -4 C 281 30, 131 26, 60 0 Z"/>
-            </g>
-          </g>
-          <path d="M 40 90 L 40 560" stroke="#201D19" stroke-opacity="0.12" stroke-dasharray="2 6"/>
+      <!-- the design tree: an iterative, branching process rendered as
+           animated line work. Ink strokes are explored branches; the accent
+           route is the chosen path, carrying a traveling pulse to its node. -->
+      <svg class="hero-figure tree" viewBox="0 0 520 620" aria-hidden="true" focusable="false">
+        <g class="branches">
+          <path class="branch w0 d0" pathLength="1" d="M 258 585 C 256 520 250 470 254 415"/>
+          <path class="branch w1 d1" pathLength="1" d="M 254 415 C 232 375 195 352 155 342"/>
+          <path class="branch w1 d1" pathLength="1" d="M 254 415 C 278 372 318 350 358 342"/>
+          <path class="branch w1 d1" pathLength="1" d="M 254 415 C 252 385 256 352 252 312"/>
+          <path class="branch w2 d2" pathLength="1" d="M 155 342 C 130 326 112 300 103 268"/>
+          <path class="branch w2 d2" pathLength="1" d="M 155 342 C 152 312 158 280 154 250"/>
+          <path class="branch w2 d2" pathLength="1" d="M 358 342 C 388 324 404 298 409 266"/>
+          <path class="branch w2 d2" pathLength="1" d="M 358 342 C 353 312 359 282 356 252"/>
+          <path class="branch w2 d2" pathLength="1" d="M 252 312 C 226 288 208 266 203 236"/>
+          <path class="branch w2 d2" pathLength="1" d="M 252 312 C 278 288 297 262 302 232"/>
+          <path class="branch w3 d3" pathLength="1" d="M 103 268 C 88 250 82 228 85 206"/>
+          <path class="branch w3 d3" pathLength="1" d="M 103 268 C 118 254 126 236 126 214"/>
+          <path class="branch w3 d3" pathLength="1" d="M 154 250 C 139 232 132 214 134 192"/>
+          <path class="branch w3 d3" pathLength="1" d="M 154 250 C 169 234 176 216 174 194"/>
+          <path class="branch w3 d3" pathLength="1" d="M 409 266 C 424 248 431 228 429 206"/>
+          <path class="branch w3 d3" pathLength="1" d="M 409 266 C 394 250 386 230 387 208"/>
+          <path class="branch w3 d3" pathLength="1" d="M 356 252 C 342 236 334 218 336 196"/>
+          <path class="branch w3 d3" pathLength="1" d="M 356 252 C 370 236 378 218 376 196"/>
+          <path class="branch w3 d3" pathLength="1" d="M 203 236 C 190 220 184 202 186 182"/>
+          <path class="branch w3 d3" pathLength="1" d="M 203 236 C 217 222 224 204 222 184"/>
+          <path class="branch w4 d4" pathLength="1" d="M 126 214 C 118 200 114 186 116 170"/>
+          <path class="branch w4 d4" pathLength="1" d="M 174 194 C 166 180 162 166 164 150"/>
+          <path class="branch w4 d4" pathLength="1" d="M 429 206 C 438 192 441 178 439 162"/>
+          <path class="branch w4 d4" pathLength="1" d="M 336 196 C 328 182 324 168 326 152"/>
+          <path class="branch w4 d4" pathLength="1" d="M 222 184 C 230 170 233 156 231 140"/>
+          <path class="branch w4 d4" pathLength="1" d="M 186 182 C 178 168 175 154 177 138"/>
+        </g>
+
+        <path class="accent-route" pathLength="1" d="M 258 585 C 256 520 250 470 254 415 C 252 385 256 352 252 312 C 278 288 297 262 302 232 C 314 216 320 200 318 178 C 326 164 328 150 326 136"/>
+        <path class="accent-pulse" pathLength="1" d="M 258 585 C 256 520 250 470 254 415 C 252 385 256 352 252 312 C 278 288 297 262 302 232 C 314 216 320 200 318 178 C 326 164 328 150 326 136"/>
+
+        <g class="nodes">
+          <circle class="node n0" cx="258" cy="585" r="4.5"/>
+          <circle class="node n1" cx="155" cy="342" r="3.5"/>
+          <circle class="node n1" cx="358" cy="342" r="3.5"/>
+          <circle class="node n1" cx="252" cy="312" r="3.5"/>
+          <circle class="node n2" cx="103" cy="268" r="3.5"/>
+          <circle class="node n2" cx="154" cy="250" r="3.5"/>
+          <circle class="node n2" cx="409" cy="266" r="3.5"/>
+          <circle class="node n2" cx="356" cy="252" r="3.5"/>
+          <circle class="node n2" cx="203" cy="236" r="3.5"/>
+          <circle class="node n2" cx="302" cy="232" r="3.5"/>
+          <circle class="node n3" cx="85" cy="206" r="3"/>
+          <circle class="node n3" cx="126" cy="214" r="3"/>
+          <circle class="node n3" cx="134" cy="192" r="3"/>
+          <circle class="node n3" cx="174" cy="194" r="3"/>
+          <circle class="node n3" cx="429" cy="206" r="3"/>
+          <circle class="node n3" cx="387" cy="208" r="3"/>
+          <circle class="node n3" cx="336" cy="196" r="3"/>
+          <circle class="node n3" cx="376" cy="196" r="3"/>
+          <circle class="node n3" cx="186" cy="182" r="3"/>
+          <circle class="node n3" cx="222" cy="184" r="3"/>
+          <circle class="node n4 node-small" cx="116" cy="170" r="2.5"/>
+          <circle class="node n4 node-small" cx="164" cy="150" r="2.5"/>
+          <circle class="node n4 node-small" cx="439" cy="162" r="2.5"/>
+          <circle class="node n4 node-small" cx="326" cy="152" r="2.5"/>
+          <circle class="node n4 node-small" cx="231" cy="140" r="2.5"/>
+          <circle class="node n4 node-small" cx="177" cy="138" r="2.5"/>
+          <circle class="node-halo" cx="326" cy="136" r="9"/>
+          <circle class="node node-accent" cx="326" cy="136" r="5.5"/>
         </g>
       </svg>
     </div>
@@ -109,30 +146,12 @@
     </div>
   </section>
 
-  <!-- ============ RESUME ============ -->
-  <section id="resume" class="section">
-    <div class="container resume-band">
-      <div>
-        <p class="sec-index"><span>02</span>Resume</p>
-        <h2 class="sec-title">The one-pager</h2>
-        <p class="resume-note">Everything on this site, condensed to a single PDF — education, experience, skills and certifications. No forms, no email gate.</p>
-      </div>
-      <div class="resume-actions">
-        <a class="btn" href="resume/Jack-Lundholm-Resume.pdf" target="_blank" rel="noopener">View resume
-          <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a class="btn btn-ghost" href="resume/Jack-Lundholm-Resume.pdf" download="Jack-Lundholm-Resume.pdf">Download
-          <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M12 4v10m0 0l-4-4m4 4l4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- ============ SKILLS ============ -->
   <section id="skills" class="section">
     <div class="container">
-      <p class="sec-index"><span>03</span>Skills</p>
-      <h2 class="sec-title">What I work with</h2>
+      <p class="sec-index"><span>02</span>Skills</p>
       <div class="skills-grid">
         <section class="skill-group">
           <h3>CAD &amp; Simulation</h3>
@@ -147,8 +166,9 @@
         <section class="skill-group">
           <h3>Programming</h3>
           <ul>
-            <li>Python <span class="skill-note">scripting &amp; workflow automation</span></li>
-            <li>C · Java</li>
+            <li>Python</li>
+            <li>C</li>
+            <li>Java</li>
             <li>MATLAB</li>
             <li>Arduino</li>
           </ul>
@@ -156,9 +176,8 @@
         <section class="skill-group">
           <h3>Fabrication &amp; Process</h3>
           <ul>
-            <li>GRP / composites layup</li>
             <li>3D printing</li>
-            <li>Subtractive manufacturing &amp; CNC</li>
+            <li>GRP / composites layup</li>
             <li>Engineering drawing &amp; P&amp;ID practice</li>
           </ul>
         </section>
@@ -171,14 +190,13 @@
           </ul>
         </section>
       </div>
-      <p class="skills-also"><span>Also:</span> UBC Project Shop WHMIS (2026) · Halcyon Days (2025) · Fermat Math Contest school winner (2024) · TDSS Physics, Math &amp; Chemistry awards (2025) · First Responder (2023)</p>
     </div>
   </section>
 
   <!-- ============ PROJECTS ============ -->
   <section id="projects" class="section">
     <div class="container">
-      <p class="sec-index"><span>04</span>Projects</p>
+      <p class="sec-index"><span>03</span>Projects</p>
       <h2 class="sec-title">Selected work</h2>
 
       <div class="tabs-wrap">
@@ -210,9 +228,8 @@
   <!-- ============ CONTACT ============ -->
   <section id="contact" class="section">
     <div class="container contact-band">
-      <p class="sec-index"><span>05</span>Contact</p>
-      <h2 class="sec-title">Say hello</h2>
-      <p class="contact-note">The fastest way to reach me is email — I check it daily. Recruiting for an internship, curious about the submarine, or just want to talk props? Write me.</p>
+      <p class="sec-index"><span>04</span>Contact</p>
+
       <a class="contact-email" href="mailto:lundholmje@gmail.com">
         <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h17A1.5 1.5 0 0 1 22 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5v-13Zm2.2.5 7.325 4.668a1 1 0 0 0 1.05 0L19.8 6H4.2ZM4 8.133V18h16V8.133l-7.36 4.697a2 2 0 0 1-2.08 0L4 8.133Z" fill="currentColor"/></svg>
         lundholmje@gmail.com
@@ -240,7 +257,7 @@
   <div class="container footer-grid">
     <p class="footer-name">Jack Lundholm</p>
     <p class="footer-meta">Engineering Physics @ UBC · Propulsion, <a href="https://subc.ca" target="_blank" rel="noopener">UBC Submarine Design Team</a></p>
-    <p class="footer-meta">© 2026 — hand-built with a text editor. No templates, no frameworks.</p>
+    <p class="footer-meta">© 2026</p>
     <a class="footer-top" href="#top">Back to top
       <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M12 20V6m0 0l-6 6m6-6l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
@@ -250,10 +267,14 @@
 <!-- ============ PROJECT MODAL ============ -->
 <dialog id="project-modal" class="modal" aria-labelledby="modal-title">
   <article class="modal-card">
-    <button class="modal-close" id="modal-close" aria-label="Close project details">
-      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
+    <div class="modal-topbar">
+      <p class="modal-kicker"><span id="modal-tag"></span><span class="dot" aria-hidden="true">·</span><span id="modal-date"></span></p>
+      <button class="modal-close" id="modal-close" aria-label="Close project details">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
 
+    <div class="modal-main">
     <figure class="modal-media">
       <div class="modal-stage">
         <img id="modal-img" alt="" width="1200" height="800">
@@ -269,7 +290,6 @@
     </figure>
 
     <div class="modal-body">
-      <p class="modal-kicker"><span id="modal-tag"></span><span class="dot" aria-hidden="true">·</span><span id="modal-date"></span></p>
       <h3 id="modal-title"></h3>
       <dl class="modal-meta">
         <div><dt>Role</dt><dd id="modal-role"></dd></div>
@@ -278,6 +298,7 @@
       </dl>
       <div class="modal-description" id="modal-description"></div>
       <div class="modal-links" id="modal-links"></div>
+    </div>
     </div>
   </article>
 </dialog>
