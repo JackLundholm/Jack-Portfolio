@@ -88,13 +88,141 @@
 
   function el(id) { return document.getElementById(id); }
 
+  /* ----- 360° panorama (drag to look around, scroll to zoom) ----- */
+  var pano = {
+    state: null,   // { img, zoom, x, y, raf, interacted, dragging, sx, sy, ox, oy }
+  };
+
+  function panoStart(src) {
+    var canvas = el("pano-canvas");
+    canvas.style.backgroundImage = 'url("' + src + '")';
+    pano.state = { zoom: 1, x: 0, y: 0, raf: 0, interacted: false, dragging: false };
+    var img = new Image();
+    img.onload = function () {
+      if (!pano.state) return;
+      pano.state.img = img;
+      panoApply();
+      pano.state.raf = requestAnimationFrame(panoSpin);
+    };
+    img.src = src;
+  }
+
+  function panoStop() {
+    if (pano.state) cancelAnimationFrame(pano.state.raf);
+    pano.state = null;
+    el("pano-canvas").style.backgroundImage = "";
+  }
+
+  /* gentle auto-rotate until the visitor takes over */
+  function panoSpin() {
+    var s = pano.state;
+    if (!s) return;
+    if (!s.interacted && !s.dragging) {
+      s.x -= 0.4;
+      panoApply();
+    }
+    s.raf = requestAnimationFrame(panoSpin);
+  }
+
+  function panoApply() {
+    var s = pano.state;
+    var canvas = el("pano-canvas");
+    var ch = canvas.clientHeight;
+    var cw = canvas.clientWidth;
+    if (!s || !s.img || !ch) return;
+    var H = ch * s.zoom;                                  // rendered bg height
+    var W = s.img.naturalWidth * (H / s.img.naturalHeight); // rendered tile width
+    /* horizontal position wraps seamlessly (background repeats on x) */
+    var x = W ? ((s.x % W) + W) % W : 0;
+    /* vertical position clamps to the visible band */
+    var y = Math.min(0, Math.max(ch - H, s.y));
+    if (H <= ch) y = (ch - H) / 2;
+    s.y = y;
+    canvas.style.backgroundSize = "auto " + H + "px";
+    canvas.style.backgroundPosition = x + "px " + y + "px";
+  }
+
+  (function () {
+    var canvas = el("pano-canvas");
+    var hint = el("pano-hint");
+
+    canvas.addEventListener("pointerdown", function (e) {
+      var s = pano.state;
+      if (!s) return;
+      s.dragging = true;
+      s.interacted = true;
+      s.sx = e.clientX; s.sy = e.clientY; s.ox = s.x; s.oy = s.y;
+      canvas.setPointerCapture(e.pointerId);
+      canvas.classList.add("grabbing");
+      if (hint) hint.classList.add("fade");
+      e.preventDefault();
+    });
+    canvas.addEventListener("pointermove", function (e) {
+      var s = pano.state;
+      if (!s || !s.dragging) return;
+      s.x = s.ox + (e.clientX - s.sx);
+      s.y = s.oy + (e.clientY - s.sy);
+      panoApply();
+    });
+    function release() {
+      var s = pano.state;
+      if (!s) return;
+      s.dragging = false;
+      canvas.classList.remove("grabbing");
+    }
+    canvas.addEventListener("pointerup", release);
+    canvas.addEventListener("pointercancel", release);
+
+    canvas.addEventListener("wheel", function (e) {
+      var s = pano.state;
+      if (!s || !s.img) return;
+      s.interacted = true;
+      if (hint) hint.classList.add("fade");
+      var factor = Math.exp(-e.deltaY * 0.0015);
+      s.zoom = Math.min(3, Math.max(1, s.zoom * factor));
+      panoApply();
+      e.preventDefault();
+    }, { passive: false });
+
+    window.addEventListener("resize", function () { if (pano.state) panoApply(); });
+  })();
+
+  /* ----- gallery media switching (image / video / pano) ----- */
+
+  function stopMedia() {
+    var v = el("modal-video");
+    if (v && !v.hidden) { try { v.pause(); } catch (err) {} }
+    if (pano.state) panoStop();
+  }
+
   function setGalleryImage(i) {
     var imgs = currentProject.images;
+    stopMedia();
+    if (!imgs.length) return;
     galleryIndex = (i + imgs.length) % imgs.length;
     var im = imgs[galleryIndex];
+    var type = im.type || "image";
+
+    stopMedia();
+
     var img = el("modal-img");
-    img.src = im.src;
-    img.alt = im.alt;
+    var vid = el("modal-video");
+    var pn = el("modal-pano");
+    img.hidden = type !== "image";
+    vid.hidden = type !== "video";
+    pn.hidden = type !== "pano";
+
+    if (type === "image") {
+      img.src = im.src;
+      img.alt = im.alt || "";
+    } else if (type === "video") {
+      if (im.poster) vid.setAttribute("poster", im.poster);
+      else vid.removeAttribute("poster");
+      vid.src = im.src;
+      try { vid.load(); } catch (err) {}
+    } else if (type === "pano") {
+      panoStart(im.src);
+    }
     el("modal-caption").textContent = im.caption || "";
 
     var thumbs = el("modal-thumbs").querySelectorAll(".thumb");
@@ -130,14 +258,41 @@
       })
       .join("");
 
-    el("modal-thumbs").innerHTML = p.images
+    var figure = el("modal-figure");
+    var empty = !(p.images && p.images.length);
+    figure.hidden = empty;
+
+    el("modal-thumbs").innerHTML = (p.images || [])
       .map(function (im, idx) {
+        var label = im.type === "video" ? "video " : im.type === "pano" ? "360° view " : "image ";
+        var inner = im.type === "video"
+          ? '<span class="thumb-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>'
+          : '<img src="' + esc(im.thumb || im.src) + '" alt="" loading="lazy" decoding="async">';
         return (
-          '<button class="thumb" data-idx="' + idx + '" aria-label="Show image ' + (idx + 1) + ' of ' + p.images.length + '">' +
-          '<img src="' + esc(im.thumb || im.src) + '" alt="" loading="lazy" decoding="async"></button>'
+          '<button class="thumb' + (im.type ? " thumb--" + im.type : "") + '" data-idx="' + idx + '" aria-label="Show ' + label + (idx + 1) + ' of ' + (p.images || []).length + '">' +
+          inner + "</button>"
         );
       })
       .join("");
+
+    var pres = el("modal-presentation");
+    var presVid = el("modal-presentation-video");
+    if (p.presentation) {
+      pres.hidden = false;
+      if (p.presentation.poster) presVid.setAttribute("poster", p.presentation.poster);
+      else presVid.removeAttribute("poster");
+      presVid.src = p.presentation.src;
+      el("modal-presentation-caption").textContent = p.presentation.caption || "";
+      var startPres = function () {
+        presVid.play().catch(function () { /* autoplay blocked — controls still available */ });
+      };
+      startPres();
+    } else {
+      pres.hidden = true;
+      try { presVid.pause(); } catch (err) {}
+      presVid.removeAttribute("src");
+      presVid.load();
+    }
 
     modal.setAttribute("aria-label", p.title + " — project details");
     setGalleryImage(0);
@@ -146,6 +301,9 @@
   }
 
   function closeModal() {
+    stopMedia();
+    var presVid = el("modal-presentation-video");
+    try { presVid.pause(); } catch (err) {}
     if (modal.open) modal.close();
   }
 
@@ -165,6 +323,9 @@
 
   /* restore focus when the dialog closes (Escape / close button / backdrop) */
   modal.addEventListener("close", function () {
+    stopMedia();
+    var presVid = el("modal-presentation-video");
+    try { presVid.pause(); } catch (err) {}
     if (lastFocused) {
       lastFocused.focus();
       lastFocused = null;
@@ -174,6 +335,7 @@
   /* arrow keys browse the gallery while the modal is open */
   document.addEventListener("keydown", function (e) {
     if (!modal.open) return;
+    if (!currentProject || !currentProject.images.length) return;
     if (e.key === "ArrowLeft") setGalleryImage(galleryIndex - 1);
     if (e.key === "ArrowRight") setGalleryImage(galleryIndex + 1);
   });

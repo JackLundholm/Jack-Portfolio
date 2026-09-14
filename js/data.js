@@ -22,7 +22,7 @@ const CATEGORIES = [
     id: "exp",
     label: "EXP",
     name: "Work Experience",
-    blurb: "Two summers as an infrastructure & transport engineering student at EXP, a consulting firm in northern Ontario — drafting, modeling and design support on 20+ contracted projects.",
+    blurb: "Two summers as an infrastructure & transport engineering student at EXP, a consulting firm in northern Ontario — drafting, modeling and design support on 20+ contracted projects. Of note: As I was under an NDA, none of the included graphics include finished products given to clients or actual project specific information. Additionally, all Electra related graphics are publicly available due to additional NDA constraints.",
   },
   {
     id: "school",
@@ -41,7 +41,11 @@ const CATEGORIES = [
 /* Fields:
    id, title, category (CATEGORIES id), coverImage, summary (one line),
    description (array of paragraphs), role, tools[], timeframe,
-   images[] ({src, thumb, alt, caption}), links[] ({label, url})   */
+   images[] ({type, src, thumb, alt, caption} — type is "image" (default),
+             "video" (plays inline in the gallery) or "pano" (drag-to-look
+             360° panorama)), links[] ({label, url}),
+   presentation ({src, caption} — a video that auto-plays in its own
+             section of the popout)   */
 
 const PROJECTS = [
   // ------------------------------------------------ EXP
@@ -52,8 +56,9 @@ const PROJECTS = [
     coverImage: "images/covers/water-treatment-plant.jpg",
     summary: "3D plant model and P&ID deliverables for a contracted municipal water treatment facility.",
     description: [
-      "As part of EXP’s summer team I produced the 3D plant model and process drawings for a municipal water treatment facility — laying out process equipment, piping runs and tie-ins, and developing the P&ID sheets used for client review.",
-      "Every drawing went through review rounds with senior engineers, where I’d walk the model, catch clashes and fold in client feedback from project instruction meetings before anything was issued.",
+      "As part of EXP’s summer team I produced a Plant 3D model of the Val Rita water treatment plant. This consisted of referencing process and instrumentation diagrams and executing pipe design to follow guidelines, avoid water hammers, minimize pipe degredation and minimize piping cost.",
+      "Every iteration went through review rounds with senior engineers, who would aprove sections or discuss areas tbat require improvement. The full water treatment plant design and drawing set was eventually shipped to the client, although it is currently on backlog.",
+        "This project gave me a tast of pipe routing and plant design, that I would eventually fully explore on Electra."
     ],
     role: "Summer engineering student — modeling & drafting",
     tools: ["AutoCAD Plant 3D", "AutoCAD"],
@@ -66,20 +71,23 @@ const PROJECTS = [
   },
   {
     id: "process-infrastructure",
-    title: "Cobalt & Nickel Process Infrastructure",
+    title: "Electra Cobalt Sulphate Processing Plant",
     category: "exp",
     coverImage: "images/covers/process-infrastructure.jpg",
-    summary: "Design support for process infrastructure at cobalt sulphate and nickel processing facilities.",
+    summary: "Design support for process infrastructure at cobalt sulphate plant.",
     description: [
-      "I contributed engineering deliverables for process infrastructure at cobalt sulphate and nickel processing facilities — from general arrangement layouts to process piping details.",
-      "The work had to respect existing plant constraints, which meant a lot of careful clash-checking against survey data and decades of legacy drawings. Nothing on these sites moves unless it’s drawn first.",
+      "For most of my role during the summer of 2026 I contriubted to design and project management work for Electra's Northern Ontario battery materials processing plant. This work mainly included pipe routing and design work, 3D modelling and isometric drawing creation.",
+        "As per Electra's website, this hydrometallurgical facility is the only facility of its kind in North America. It will supply the electric vehicle market with cobalt sulfate, and has an operating history of previously producing cobalt carbonate and nickel carbonate. The full capcity of the plant would produce enough cobalt sulphate to supply over 1 million EVs each year.",
+        "I worked effectively with large teams of engineers to hit tight deadlines and get piping designs ready for the contractors on the ground at site."
     ],
     role: "Summer engineering student — drafting & design support",
-    tools: ["AutoCAD", "Plant 3D"],
-    timeframe: "Summer 2025 · EXP",
+    tools: ["AutoCAD", "Plant 3D", "Navisworks"],
+    timeframe: "Summer 2026 · EXP",
     images: [
       { src: "images/detail/process-infrastructure-1.jpg", thumb: "images/thumbs/process-infrastructure-1.jpg", alt: "Aerial view of a processing facility surrounded by forest", caption: "Site of the processing facility" },
-      { src: "images/detail/process-infrastructure-2.jpg", thumb: "images/thumbs/process-infrastructure-2.jpg", alt: "Process area of the facility with tanks and piping", caption: "Process area — tanks and piping" },
+      { src: "images/detail/process-infrastructure-2.jpg", thumb: "images/thumbs/process-infrastructure-2.jpg", alt: "Wide banner view of the Ontario refinery site", caption: "Ontario refinery site — wide view" },
+      { src: "images/detail/process-infrastructure-3.jpg", thumb: "images/thumbs/process-infrastructure-3.jpg", alt: "Wide banner view of the processing plant", caption: "Plant overview" },
+      { type: "pano", src: "images/pano/process-infrastructure-360.jpg", thumb: "images/pano/process-infrastructure-360.jpg", alt: "Interactive 360 degree panorama of the processing facility", caption: "360° panorama — drag to look around, scroll to zoom" },
     ],
     links: [],
   },
@@ -91,7 +99,8 @@ const PROJECTS = [
     summary: "Complete design and drafting packages for two municipal sewage lift stations.",
     description: [
       "I designed and drafted full deliverables for two sewage lift stations: site plans, wet-well sections, valve chambers and forcemain profiles. Hydraulic sizing was checked in SewerGEMS, with forcemain analysis spreadsheets behind the pump selection.",
-      "I also wrote the client-facing design brief that walked the municipality through the operating assumptions in plain language — the version of the project that non-engineers actually read.",
+        "The entire project, while checked and given feedback by my project manager was completed solo and ahead of schedule.",
+      "I also wrote the client-facing design brief that walked the municipality through the operating assumptions in plain language.",
     ],
     role: "Summer engineering student",
     tools: ["AutoCAD", "SewerGEMS", "Excel"],
@@ -100,6 +109,7 @@ const PROJECTS = [
       { src: "images/detail/lift-station-design-1.jpg", thumb: "images/thumbs/lift-station-design-1.jpg", alt: "Lift station drawing with plan view and wet-well section", caption: "KL lift station — plan and wet-well section" },
       { src: "images/detail/lift-station-design-2.jpg", thumb: "images/thumbs/lift-station-design-2.jpg", alt: "Client-facing lift station design brief document", caption: "Client-facing design brief" },
       { src: "images/detail/lift-station-design-3.jpg", thumb: "images/thumbs/lift-station-design-3.jpg", alt: "IF lift station drawing sheet", caption: "IF lift station — issued drawing" },
+      { src: "images/detail/lift-station-design-4.jpg", thumb: "images/thumbs/lift-station-design-4.jpg", alt: "Screenshot of lift station design calculations", caption: "Supporting design calculations" },
     ],
     links: [],
   },
@@ -110,8 +120,10 @@ const PROJECTS = [
     summary: "Hydraulic models of sewer and water distribution systems for contracted municipal projects.",
     coverImage: "images/covers/network-modeling.jpg",
     description: [
-      "I built and calibrated hydraulic models of sewer and water distribution networks in SewerGEMS and WaterGEMS — sizing mains, checking capacities and supporting fire-prevention studies for contracted municipal projects.",
-      "Results and assumptions were summarized in client-facing design briefs, so the models had to survive being explained, not just run.",
+      "I built and calibrated hydraulic models of sewer and water distribution networks in SewerGEMS and WaterGEMS. This work included sizing mains, checking capacities, modelling piping lengths and supporting fire-prevention studies for contracted municipal projects.",
+        "The biggest roadblock I faced for the construction of these models were the quality of drawings that were presented by the different townships and municipalities. As the majority of these towns are small, they lack the ability to routinely upgrade their water and sewer systems, resulting in very old documentation that is sometimes scattered among old archives. In order to read some of these old scans, I had to come up with some creative solutions in manipulating image data to sharpen faded lines or research outdated drafting practices that had been utilized previously.",
+        "The models were as follows: water and sewer models for Longlac, Ontario; water and sewer models for Cobalt, Ontario; water and sewer models for Porcus, Ontario and a fire prevention inspection and design brief for Agnico Eagle mines.",
+      "Results and assumptions were summarized in client-facing design briefs.",
     ],
     role: "Summer engineering student",
     tools: ["SewerGEMS", "WaterGEMS", "Excel"],
@@ -119,6 +131,7 @@ const PROJECTS = [
     images: [
       { src: "images/detail/network-modeling-1.jpg", thumb: "images/thumbs/network-modeling-1.jpg", alt: "Hydraulic model of a water distribution network shown in modeling software", caption: "Distribution network model" },
       { src: "images/detail/network-modeling-2.jpg", thumb: "images/thumbs/network-modeling-2.jpg", alt: "Forcemain analysis spreadsheet with hydraulic calculations", caption: "Forcemain analysis spreadsheet" },
+      { src: "images/detail/network-modeling-3.jpg", thumb: "images/thumbs/network-modeling-3.jpg", alt: "Screenshot of a water and sewer network model under construction", caption: "Network model — working view" },
     ],
     links: [],
   },
@@ -135,62 +148,41 @@ const PROJECTS = [
     role: "Developer",
     tools: ["Python"],
     timeframe: "Summer 2025 · EXP",
-    images: [
-      { src: "images/detail/python-automation-1.jpg", thumb: "images/thumbs/python-automation-1.jpg", alt: "The custom Python file-management tool running in a dark code editor", caption: "The tool in use" },
-      { src: "images/detail/python-automation-2.jpg", thumb: "images/thumbs/python-automation-2.jpg", alt: "Project file tree managed by the automation script", caption: "Automated file structure" },
-      { src: "images/detail/python-automation-3.jpg", thumb: "images/thumbs/python-automation-3.jpg", alt: "Console output from the file-management script", caption: "Batch processing run" },
-    ],
+    images: [],
     links: [],
   },
 
   // ------------------------------------------------ School
   {
     id: "orthographic-drawings",
-    title: "Orthographic Drawing Set",
+    title: "The Claw",
     category: "school",
     coverImage: "images/covers/orthographic-drawings.jpg",
     summary: "A complete orthographic drawing set from first-year engineering graphics.",
     description: [
-      "A full orthographic drawing set from a first-year engineering communication module: multiview layouts, sections and dimensioning done to drafting standard.",
-      "Drawings are the contract between design and fabrication — this module is where that clicked for me, and it’s the skill I used daily at EXP two semesters later.",
+      "Alongside a team of other engineering students, I designed and manudactured two functional automatic claw devices. The crux of the project was the gathering of data and multiple different prototypes that were created to become more informed on our project goals and refine the final project. The claw was programmed on an arduino in C using ultrasonic and physical sensors to automatically detect and grab a hold of objects. In addition to the claw itself, I created the fully dimensioned orthographic drawings and aided in the presentation of final deliverables.",
+      "This project helped me to ground my connection between design and manufacturing, although there are unlimited wild and creative designs you can think of, it's the ones that can be manufactured that actually get built.",
     ],
     role: "Individual coursework",
-    tools: ["Technical drafting", "CAD"],
+    tools: ["Technical drafting", "CAD", "C", "Arduino"],
     timeframe: "2025–26 · UBC",
     images: [
-      { src: "images/detail/orthographic-drawings-1.jpg", thumb: "images/thumbs/orthographic-drawings-1.jpg", alt: "Orthographic drawing sheet with front, top and side views and dimensions", caption: "Drawing sheet — multiviews, sections and dimensions" },
+      { src: "images/detail/orthographic-drawings-1.jpg", thumb: "images/thumbs/orthographic-drawings-1.jpg", alt: "Fully dimensioned orthographic drawing set for the claw", caption: "Fully dimensioned orthographic drawing set" },
+      { type: "video", src: "images/videos/claw-demonstration.mp4", thumb: "images/thumbs/claw-demo-video.jpg", poster: "images/videos/demo-poster.jpg", caption: "The Claw in action — automatic grab demonstration" },
     ],
+    presentation: { src: "images/videos/claw-presentation.mp4", poster: "images/videos/pres-poster.jpg", caption: "Design presentation — running" },
     links: [],
   },
-  {
-    id: "product-renders",
-    title: "Product Study — Tube Renders",
-    category: "school",
-    coverImage: "images/covers/product-renders.jpg",
-    summary: "A surfacing and rendering exercise: modeling a product and lighting it from a series of angles.",
-    description: [
-      "A surfacing and rendering exercise from a graphics module: model a deceptively simple product, then light and render it from a series of angles.",
-      "More effort than a tube deserves — which is exactly what made it a good exercise in surfaces, materials and light.",
-    ],
-    role: "Individual coursework",
-    tools: ["CAD modeling", "Rendering"],
-    timeframe: "2025–26 · UBC",
-    images: [
-      { src: "images/detail/product-renders-1.jpg", thumb: "images/thumbs/product-renders-1.jpg", alt: "Render of the product model, angled view", caption: "Angle one" },
-      { src: "images/detail/product-renders-2.jpg", thumb: "images/thumbs/product-renders-2.jpg", alt: "Render of the product model, second angle", caption: "Angle two" },
-      { src: "images/detail/product-renders-3.jpg", thumb: "images/thumbs/product-renders-3.jpg", alt: "Render of the product model, third angle", caption: "Angle three" },
-    ],
-    links: [],
-  },
+
+  
   {
     id: "pcb-design",
     title: "Mixed-Signal PCB Design",
     category: "school",
     coverImage: "images/covers/pcb-design.svg",
-    summary: "Laid out, grounded and manufactured a circuit board in KiCad — digital, analog and mixed signal.",
+    summary: "Currently in progress",
     description: [
-      "In UBC’s PCB Design and Prototyping eLab I developed circuit board layouts in KiCad, with a focus on grounding and partitioning strategies to keep noise down across digital, analog and mixed-signal sections.",
-      "The final layout was sent out and manufactured — a working board at the end, not just a gerber folder.",
+      "",
     ],
     role: "Student — PCB Design & Prototyping eLab",
     tools: ["KiCad"],
@@ -204,7 +196,7 @@ const PROJECTS = [
   // ------------------------------------------------ SUBC
   {
     id: "human-powered-submarine",
-    title: "Human-Powered Submarine",
+    title: "Submarine Prop Design and Manufacturing",
     category: "subc",
     coverImage: "images/covers/human-powered-submarine.jpg",
     summary: "A fully functional human-powered submarine — 8th internationally at eISR 2026.",
@@ -216,6 +208,11 @@ const PROJECTS = [
     tools: ["SolidWorks", "GRP layup", "3D printing", "Machining"],
     timeframe: "Sept 2025 – present",
     images: [
+      { src: "images/detail/propeller-design-1.jpg", thumb: "images/thumbs/propeller-design-1.jpg", alt: "Render of the designed propeller", caption: "Final propeller design" },
+      { src: "images/detail/propeller-design-2.jpg", thumb: "images/thumbs/propeller-design-2.jpg", alt: "Propeller model with blade section lines overlaid", caption: "Blade sections overlaid on the model" },
+      { src: "images/detail/propeller-design-3.jpg", thumb: "images/thumbs/propeller-design-3.jpg", alt: "Blade section curves generated in OpenProp", caption: "Sections from OpenProp" },
+      { src: "images/detail/propeller-design-4.jpg", thumb: "images/thumbs/propeller-design-4.jpg", alt: "Motion study of the propeller under load", caption: "Motion study — blade loading" },
+      { src: "images/detail/composites-manufacturing-1.jpg", thumb: "images/thumbs/composites-manufacturing-1.jpg", alt: "Working on submarine parts in the workshop", caption: "In the shop" },
       { src: "images/detail/human-powered-submarine-1.jpg", thumb: "images/thumbs/human-powered-submarine-1.jpg", alt: "The human-powered submarine in the water during testing", caption: "In the water" },
       { src: "images/detail/human-powered-submarine-2.jpg", thumb: "images/thumbs/human-powered-submarine-2.jpg", alt: "The submarine team working on the hull", caption: "Team work on the hull" },
       { src: "images/detail/human-powered-submarine-3.jpg", thumb: "images/thumbs/human-powered-submarine-3.jpg", alt: "The submarine being prepared in the workshop", caption: "Shop prep" },
@@ -225,46 +222,5 @@ const PROJECTS = [
       { label: "SUBC — UBC’s Submarine Design Team", url: "https://subc.ca" },
     ],
   },
-  {
-    id: "propeller-design",
-    title: "Propeller Design & Prototyping",
-    category: "subc",
-    coverImage: "images/covers/propeller-design.jpg",
-    summary: "Designed, fabricated and tank-tested four propeller prototypes for the race submarine.",
-    description: [
-      "I designed the submarine’s propeller in SolidWorks, starting from OpenProp blade sections and iterating through four prototypes that balanced thrust and efficiency against what we could actually manufacture in-house.",
-      "Each prototype was fabricated and tested, with motion studies checking blade loading before the final design went on the boat. I also researched next-generation concepts — single-blade props and biomimetic designs — and presented the findings to the team.",
-      "The calculations and design process were written up in the team’s professional-grade final report submitted to eISR.",
-    ],
-    role: "Propulsion — propeller designer",
-    tools: ["SolidWorks", "SolidWorks Flow Simulation", "OpenProp", "3D printing", "CNC"],
-    timeframe: "2025–26 · SUBC",
-    images: [
-      { src: "images/detail/propeller-design-1.jpg", thumb: "images/thumbs/propeller-design-1.jpg", alt: "Render of the designed propeller", caption: "Final propeller design" },
-      { src: "images/detail/propeller-design-2.jpg", thumb: "images/thumbs/propeller-design-2.jpg", alt: "Propeller model with blade section lines overlaid", caption: "Blade sections overlaid on the model" },
-      { src: "images/detail/propeller-design-3.jpg", thumb: "images/thumbs/propeller-design-3.jpg", alt: "Blade section curves generated in OpenProp", caption: "Sections from OpenProp" },
-      { src: "images/detail/propeller-design-4.jpg", thumb: "images/thumbs/propeller-design-4.jpg", alt: "Motion study of the propeller under load", caption: "Motion study — blade loading" },
-    ],
-    links: [],
-  },
-  {
-    id: "composites-manufacturing",
-    title: "Composites & Parts Manufacturing",
-    category: "subc",
-    coverImage: "images/covers/composites-manufacturing.jpg",
-    summary: "GRP layup, 3D printing and subtractive manufacturing for hull and drive-train parts.",
-    description: [
-      "Beyond design work, I manufacture parts for the submarine: glass-reinforced plastic layup for hull sections and fairings, 3D-printed components, and subtractive machining for drive-train parts.",
-      "Building what you designed is the fastest way to learn why the next design should be different.",
-    ],
-    role: "Manufacturing team member",
-    tools: ["GRP layup", "3D printing", "CNC / subtractive"],
-    timeframe: "2025–26 · SUBC",
-    images: [
-      { src: "images/detail/composites-manufacturing-1.jpg", thumb: "images/thumbs/composites-manufacturing-1.jpg", alt: "Working on submarine parts in the workshop", caption: "In the shop" },
-    ],
-    links: [
-      { label: "SUBC — UBC’s Submarine Design Team", url: "https://subc.ca" },
-    ],
-  },
+
 ];

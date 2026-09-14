@@ -130,16 +130,15 @@
       <p class="sec-index">About</p>
       <div class="about-grid">
         <div class="about-copy">
-          <p>I’m Jack — a second-year Engineering Physics student at the University of British Columbia. Before that, I grew up in northern Ontario, where two summers at EXP, a consulting engineering office in New Liskeard, taught me what engineering looks like when it leaves the textbook: drawings with deadlines, clients with questions, and software you learn on a Tuesday because the project needs it Wednesday.</p>
-          <p>What pulls me in is the overlap of mechanical design, fluids and electronics — a propeller you can hold, a circuit board you can’t quite keep quiet, a water network that has to behave. Right now that shows up as propulsion work on UBC’s human-powered submarine team, where I design and machine parts and occasionally get to watch the boat actually swim.</p>
-          <p>I’m looking for a summer 2027 internship or research position where I can design real things under real constraints — mechanical, electromechanical, or somewhere in between. If that sounds like your team, <a href="#contact">get in touch</a>.</p>
+          <p> My name is Jack Lundholm and I am a 2nd years student in Engineering Physics at the University of British Columbia. I have a deep passion for automation and electromechanical systems on top of an inherent love of building. On top of this, I excell in team environments and have a compassion for others I consider one of my greatest strengths. </p>
+          <p> These drive me to build skills and eventually develop systems that can benefit those around me and help all of humanity. </p>
+          <p> If this aligns with your goals, <a href="#contact">get in touch</a>.</p>
         </div>
         <aside class="about-facts" aria-label="Quick facts">
           <dl>
             <div><dt>Degree</dt><dd>BASc, Engineering Physics</dd></div>
             <div><dt>University</dt><dd>University of British Columbia · Dean’s List</dd></div>
-            <div><dt>Team</dt><dd><a href="https://subc.ca" target="_blank" rel="noopener">UBC Submarine Design Team</a> (SUBC), propulsion</dd></div>
-            <div><dt>Experience</dt><dd>Two summers, EXP — Infrastructure &amp; Transport</dd></div>
+            <div><dt>Focus</dt><dd>System thinking, Automation, Cross discipline problems</dd></div>
           </dl>
         </aside>
       </div>
@@ -256,8 +255,8 @@
 <footer class="site-footer">
   <div class="container footer-grid">
     <p class="footer-name">Jack Lundholm</p>
-    <p class="footer-meta">Engineering Physics @ UBC · Propulsion, <a href="https://subc.ca" target="_blank" rel="noopener">UBC Submarine Design Team</a></p>
-    <p class="footer-meta">© 2026</p>
+    <p class="footer-meta">Engineering Physics @ UBC </a></p>
+    <p class="footer-meta">© 2026 leveraging glm-5.3</p>
     <a class="footer-top" href="#top">Back to top
       <svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M12 20V6m0 0l-6 6m6-6l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
@@ -284,9 +283,15 @@
         </dl>
       </header>
 
-      <figure class="modal-figure">
+      <figure class="modal-figure" id="modal-figure">
       <div class="modal-stage">
-        <img id="modal-img" alt="" width="1200" height="800">
+        <img id="modal-img" alt="" width="1200" height="800" hidden>
+        <video id="modal-video" controls playsinline preload="metadata" hidden></video>
+        <div class="pano" id="modal-pano" hidden>
+          <div class="pano-canvas" id="pano-canvas"></div>
+          <span class="pano-badge" aria-hidden="true">360°</span>
+          <span class="pano-hint" id="pano-hint">Drag to look around · scroll to zoom</span>
+        </div>
         <button class="gallery-nav gallery-prev" id="gallery-prev" aria-label="Previous image">
           <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
@@ -297,6 +302,12 @@
       <div class="modal-thumbs" id="modal-thumbs"></div>
       <figcaption id="modal-caption"></figcaption>
       </figure>
+
+      <section class="modal-presentation" id="modal-presentation" hidden>
+        <h4 class="presentation-heading">Presentation</h4>
+        <video id="modal-presentation-video" controls muted loop playsinline preload="metadata"></video>
+        <p class="modal-caption" id="modal-presentation-caption"></p>
+      </section>
 
       <div class="modal-text" id="modal-description"></div>
       <div class="modal-links" id="modal-links"></div>
