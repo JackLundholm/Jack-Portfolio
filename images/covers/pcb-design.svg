@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Line drawing of a printed circuit board layout">
+  <!-- plate background (matches site paper tint) -->
+  <rect width="1200" height="800" fill="#F5F2EA"/>
+
+  <!-- board outline -->
+  <rect x="380" y="110" width="440" height="580" rx="10" fill="#FDFCF8" stroke="#201D19" stroke-opacity="0.55" stroke-width="3"/>
+
+  <!-- mounting holes -->
+  <g fill="none" stroke="#201D19" stroke-opacity="0.5" stroke-width="3">
+    <circle cx="412" cy="142" r="11"/><circle cx="788" cy="142" r="11"/>
+    <circle cx="412" cy="658" r="11"/><circle cx="788" cy="658" r="11"/>
+  </g>
+
+  <!-- traces (45-degree routing) -->
+  <g fill="none" stroke="#201D19" stroke-opacity="0.45" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="515,360 470,360 450,380 450,540"/>
+    <polyline points="515,435 465,435 445,455 445,600"/>
+    <polyline points="685,435 735,435 755,455 755,620"/>
+    <polyline points="560,315 560,270 575,255 700,255"/>
+    <polyline points="635,315 635,240"/>
+    <polyline points="560,485 560,530 545,545 480,545"/>
+    <polyline points="610,485 610,560"/>
+  </g>
+  <!-- accent trace -->
+  <polyline points="685,360 730,360 750,340 750,180" fill="none" stroke="#A63D2A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- pads -->
+  <g fill="#201D19" fill-opacity="0.55">
+    <circle cx="450" cy="540" r="6"/><circle cx="445" cy="600" r="6"/>
+    <circle cx="755" cy="620" r="6"/><circle cx="700" cy="255" r="6"/>
+    <circle cx="635" cy="240" r="6"/><circle cx="480" cy="545" r="6"/>
+    <circle cx="610" cy="560" r="6"/>
+  </g>
+  <circle cx="750" cy="180" r="7" fill="#A63D2A"/>
+
+  <!-- central IC (QFP footprint) -->
+  <g stroke="#201D19" stroke-opacity="0.65" stroke-width="3">
+    <rect x="540" y="340" width="120" height="120" fill="none"/>
+    <g stroke-width="4">
+      <polyline points="540,360 515,360"/><polyline points="540,385 515,385"/>
+      <polyline points="540,410 515,410"/><polyline points="540,435 515,435"/>
+      <polyline points="660,360 685,360"/><polyline points="660,385 685,385"/>
+      <polyline points="660,410 685,410"/><polyline points="660,435 685,435"/>
+      <polyline points="560,340 560,315"/><polyline points="585,340 585,315"/>
+      <polyline points="610,340 610,315"/><polyline points="635,340 635,315"/>
+      <polyline points="560,460 560,485"/><polyline points="585,460 585,485"/>
+      <polyline points="610,460 610,485"/><polyline points="635,460 635,485"/>
+    </g>
+  </g>
+
+  <!-- passives -->
+  <g stroke="#201D19" stroke-opacity="0.5" stroke-width="3" fill="none">
+    <rect x="492" y="214" width="26" height="13"/>
+    <rect x="668" y="534" width="13" height="26"/>
+  </g>
+
+  <!-- silkscreen -->
+  <g fill="#201D19" fill-opacity="0.6" font-family="Consolas, ui-monospace, monospace">
+    <text x="600" y="172" font-size="20" letter-spacing="6" text-anchor="middle">MIXED-SIGNAL</text>
+    <text x="600" y="700" font-size="24" letter-spacing="8" text-anchor="middle">JL-01 · REV A</text>
+  </g>
+
+  <!-- drafting label on plate margin -->
+  <text x="64" y="752" font-size="19" letter-spacing="4" fill="#201D19" fill-opacity="0.45" font-family="Consolas, ui-monospace, monospace">FIG. 08 — BOARD LAYOUT, TOP VIEW</text>
+</svg>
