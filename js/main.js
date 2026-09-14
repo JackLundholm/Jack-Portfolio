@@ -70,8 +70,7 @@
         '<button class="card" data-id="' + p.id + '" aria-haspopup="dialog">' +
           '<span class="card-media"><img src="' + esc(p.coverImage) + '" alt="' + esc(p.coverAlt || (p.title + " — cover image")) + '" width="1200" height="800" loading="lazy" decoding="async"></span>' +
           '<span class="card-body">' +
-            '<span class="card-meta"><span class="card-cat">' + esc(cat.label) + "</span>" +
-            '<span class="card-date">' + esc(p.timeframe.split("·")[0].trim()) + "</span></span>" +
+            '<span class="card-meta"><span class="card-cat">' + esc(cat.label) + '</span><span class="dot" aria-hidden="true">·</span><span class="card-date">' + esc(p.timeframe.split("·")[0].trim()) + "</span></span>" +
             '<span class="card-title">' + esc(p.title) + "</span>" +
             '<span class="card-summary">' + esc(p.summary) + "</span>" +
           "</span>" +
